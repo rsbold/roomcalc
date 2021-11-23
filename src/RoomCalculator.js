@@ -1,6 +1,6 @@
 
 import React from 'react';
-import ReactDOM from 'react-dom';
+import {Container, Card, Row, Col, Form} from 'react-bootstrap';
 
 class RoomCalculator extends React.Component {
     // Room width, height, length are state set by user.
@@ -102,20 +102,62 @@ class RoomCalculator extends React.Component {
 
     render() {
         return(
-            <div>
-                <h1>Room Dimensions</h1>
-                <p>Length (m): <input type="text" value={this.state.length} onChange = {this.setLength}></input></p>
-                <p>Width (m): <input type="text" value={this.state.width} onChange = {this.setWidth}></input></p>
-                <p>Height (m): <input type="text" value={this.state.height} onChange = {this.setHeight}></input></p>
+            <Container>
+                <h1>Room Calculator</h1>
+                <Card>
+                    <Card.Header>Room Dimensions</Card.Header>
+                    <Card.Body>
+                    <Form>
+                        <Form.Group as={Row} className="mb-3">
+                            <Form.Label column md={3}>Length (m)</Form.Label>
+                            <Col md={9}>
+                                <Form.Control type="text" value={this.state.length} onChange={this.setLength}></Form.Control>
+                            </Col>
+                        </Form.Group>
 
-                <h1>Calculations</h1>
-                <p>Floor area: {this.state.floorArea} m²</p>
-                <p>Wall paint area: {this.state.wallPaintArea} m²</p>
-                <p>Room volume: {this.state.roomVolume} m³</p>
-                <p>{this.state.message}</p>
+                        <Form.Group as={Row} className="mb-3">
+                            <Form.Label column md={3}>Width (m)</Form.Label>
+                            <Col md={9}>
+                                <Form.Control type="text" value={this.state.width} onChange={this.setWidth}></Form.Control>
+                            </Col>
+                        </Form.Group>
 
+                        <Form.Group as={Row} className="mb-3">
+                            <Form.Label column md={3}>Height (m)</Form.Label>
+                            <Col md={9}>
+                                <Form.Control type="text" value={this.state.height} onChange={this.setHeight}></Form.Control>
+                            </Col>
+                        </Form.Group>
 
-            </div>
+                    </Form>
+                </Card.Body>
+                </Card>
+
+                <Card>
+                    <Card.Header>
+                        Calculations
+                    </Card.Header>
+                    <Card.Body>
+                        <Row>
+                            <Col md={3}>Floor area:</Col>
+                            <Col md={9}>{this.state.floorArea} m²</Col>
+                        </Row>
+                        <Row>
+                            <Col md={3}>Wall paint area:</Col>
+                            <Col md={9}>{this.state.wallPaintArea} m²</Col>
+                        </Row>
+                        <Row>
+                            <Col md={3}>Room volume:</Col>
+                            <Col md={9}>{this.state.roomVolume} m³</Col>
+                        </Row>
+                    </Card.Body>
+                </Card>
+                <Row>
+                    <Col md={12}>
+                        {this.state.message}
+                    </Col>
+                </Row>
+            </Container>
         )
     }
 }

@@ -33,18 +33,8 @@ class RoomCalculator extends React.Component {
 
         if(isNaN(w)) {
             this.setState({message:"Enter a numeric value."});
-        } else {
-            let fa = this.floorArea(w, this.state.length);
-            let wpa = this.wallPaintArea(w, this.state.length, this.state.height);
-            let rv = this.roomVolume(w, this.state.length, this.state.height);
-            
-            this.setState({
-                width: w,
-                floorArea: fa,
-                wallPaintArea: wpa,
-                roomVolume: rv,
-                message: "Calculated OK"
-            });
+        } else {            
+            this.setState({width: w}, () => {this.recalc()});
         }   
     }
 
@@ -53,18 +43,8 @@ class RoomCalculator extends React.Component {
 
         if(isNaN(l)) {
             this.setState({message: "Enter a numeric value"});
-        } else {
-            let fa = this.floorArea(this.state.width, l);
-            let wpa = this.wallPaintArea(this.state.width, l, this.state.height);
-            let rv = this.roomVolume(this.state.width, l, this.state.height);
-            
-            this.setState({
-                length: l,
-                floorArea: fa,
-                wallPaintArea: wpa,
-                roomVolume: rv,
-                message: "Calculated OK"
-            });
+        } else {            
+            this.setState({length: l}, () => {this.recalc()});
         }
     }
 
@@ -74,30 +54,27 @@ class RoomCalculator extends React.Component {
         if (isNaN(h)) {
             this.setState({message:"Enter a numeric value"});
         } else {
-
-            // Height doesn't affect floor area, don't need to calculate.
-            let wpa = this.wallPaintArea(this.state.width, this.state.length, h);
-            let rv = this.roomVolume(this.state.width, this.state.length, h);
-
-            this.setState({
-                height: h,
-                wallPaintArea: wpa,
-                roomVolume: rv
-            });
+            this.setState({height: h}, () => {this.recalc()});
         }
     }
 
-    floorArea(width, length) {
-        return width * length;
-    }
+    recalc() {
 
-    wallPaintArea(width, length, height) {
-        return (length * height * 2.0) +
-            (width * height * 2.0);
-    }
+        // Floor area.
+        let fa = this.state.width * this.state.length;
 
-    roomVolume(width, length, height) {
-        return width * length * height;
+        // Wall paint area.
+        let wpa = (this.state.length * this.state.height * 2.0) + 
+            (this.state.width * this.state.height * 2.0);
+
+        // Room volume.
+        let rv = this.state.width * this.state.length * this.state.height;
+
+        this.setState({
+            floorArea: fa,
+            wallPaintArea: wpa,
+            roomVolume: rv
+        });
     }
 
     render() {

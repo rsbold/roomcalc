@@ -26,6 +26,6 @@ React-Bootstrap was used for layout and styling.
 2. When calculating the paint area, we're not including the ceiling.
 
 ## Possible Future refinements
-1. Display calculated values to fixed number of decimal places.
+1. ~~Display calculated values to fixed number of decimal places.~~
 2. ~~Refactor calculations to reduce repeated/similar code.~~
 3. ~~Styling status message, e.g. alert red when non-numeric values entered.~~

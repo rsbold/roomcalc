@@ -29,3 +29,8 @@ React-Bootstrap was used for layout and styling.
 1. ~~Display calculated values to fixed number of decimal places.~~
 2. ~~Refactor calculations to reduce repeated/similar code.~~
 3. ~~Styling status message, e.g. alert red when non-numeric values entered.~~
+
+This could have been written as multiple components:
+1. An input component to gather user input for length, height and width
+2. A display component to display the calculated areas and volume (accepting values via props)
+3. A top level component to tie the two together, with state lifted up to this "host" component.

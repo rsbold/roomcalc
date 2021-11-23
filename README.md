@@ -1,5 +1,12 @@
 # Room Calculator app - coding challenge for Borwell.
 Written by Rob Bold 23/11/2021.
+Visual Studio Code, React, React-Bootstrap.
+
+## To Run
+Clone the git repository.
+Run
+    npm install
+    npm start
 
 ## Description
 The application consists of a single component, RoomCalculator.  This component doesn't take

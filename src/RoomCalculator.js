@@ -18,7 +18,8 @@ class RoomCalculator extends React.Component {
             height : 1.0,
             floorArea: 1.0,
             wallPaintArea: 1.0,
-            roomVolume: 1.0
+            roomVolume: 1.0,
+            message: ""
         };
 
         // Wire up event handlers so they get the correct context of "this".
@@ -29,46 +30,61 @@ class RoomCalculator extends React.Component {
 
     setWidth(event) {
         let w = event.target.value;
-        
-        let fa = this.floorArea(w, this.state.length);
-        let wpa = this.wallPaintArea(w, this.state.length, this.state.height);
-        let rv = this.roomVolume(w, this.state.length, this.state.height);
-        
-        this.setState({
-            width: w,
-            floorArea: fa,
-            wallPaintArea: wpa,
-            roomVolume: rv
-        });
+
+        if(isNaN(w)) {
+            this.setState({message:"Enter a numeric value."});
+        } else {
+            let fa = this.floorArea(w, this.state.length);
+            let wpa = this.wallPaintArea(w, this.state.length, this.state.height);
+            let rv = this.roomVolume(w, this.state.length, this.state.height);
+            
+            this.setState({
+                width: w,
+                floorArea: fa,
+                wallPaintArea: wpa,
+                roomVolume: rv,
+                message: "Calculated OK"
+            });
+        }   
     }
 
     setLength(event) {
         let l = event.target.value;
-        
-        let fa = this.floorArea(this.state.width, l);
-        let wpa = this.wallPaintArea(this.state.width, l, this.state.height);
-        let rv = this.roomVolume(this.state.width, l, this.state.height);
-        
-        this.setState({
-            length: l,
-            floorArea: fa,
-            wallPaintArea: wpa,
-            roomVolume: rv
-        });
+
+        if(isNaN(l)) {
+            this.setState({message: "Enter a numeric value"});
+        } else {
+            let fa = this.floorArea(this.state.width, l);
+            let wpa = this.wallPaintArea(this.state.width, l, this.state.height);
+            let rv = this.roomVolume(this.state.width, l, this.state.height);
+            
+            this.setState({
+                length: l,
+                floorArea: fa,
+                wallPaintArea: wpa,
+                roomVolume: rv,
+                message: "Calculated OK"
+            });
+        }
     }
 
     setHeight(event) {
         let h = event.target.value;
 
-        // Height doesn't affect floor area, don't need to calculate.
-        let wpa = this.wallPaintArea(this.state.width, this.state.length, h);
-        let rv = this.roomVolume(this.state.width, this.state.length, h);
+        if (isNaN(h)) {
+            this.setState({message:"Enter a numeric value"});
+        } else {
 
-        this.setState({
-            height: h,
-            wallPaintArea: wpa,
-            roomVolume: rv
-        });
+            // Height doesn't affect floor area, don't need to calculate.
+            let wpa = this.wallPaintArea(this.state.width, this.state.length, h);
+            let rv = this.roomVolume(this.state.width, this.state.length, h);
+
+            this.setState({
+                height: h,
+                wallPaintArea: wpa,
+                roomVolume: rv
+            });
+        }
     }
 
     floorArea(width, length) {
@@ -95,7 +111,8 @@ class RoomCalculator extends React.Component {
                 <h1>Calculations</h1>
                 <p>Floor area: {this.state.floorArea} m²</p>
                 <p>Wall paint area: {this.state.wallPaintArea} m²</p>
-                <p>Room volume: {this.state.roomVolume} m²</p>
+                <p>Room volume: {this.state.roomVolume} m³</p>
+                <p>{this.state.message}</p>
 
 
             </div>

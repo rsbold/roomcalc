@@ -1,6 +1,6 @@
 
 import React from 'react';
-import {Container, Card, Row, Col, Form} from 'react-bootstrap';
+import {Container, Card, Row, Col, Form, Alert} from 'react-bootstrap';
 
 class RoomCalculator extends React.Component {
     // Room width, height, length are state set by user.
@@ -19,7 +19,8 @@ class RoomCalculator extends React.Component {
             floorArea: 1.0,
             wallPaintArea: 1.0,
             roomVolume: 1.0,
-            message: ""
+            message: "",
+            inErrorState: false
         };
 
         // Wire up event handlers so they get the correct context of "this".
@@ -32,9 +33,9 @@ class RoomCalculator extends React.Component {
         let w = event.target.value;
 
         if(isNaN(w)) {
-            this.setState({message:"Enter a numeric value."});
+            this.setState({message:"Enter a numeric value.", inErrorState:true});
         } else {            
-            this.setState({width: w}, () => {this.recalc()});
+            this.setState({width: w, inErrorState:false, message:"OK"}, () => {this.recalc()});
         }   
     }
 
@@ -42,9 +43,9 @@ class RoomCalculator extends React.Component {
         let l = event.target.value;
 
         if(isNaN(l)) {
-            this.setState({message: "Enter a numeric value"});
+            this.setState({message: "Enter a numeric value", inErrorState:true});
         } else {            
-            this.setState({length: l}, () => {this.recalc()});
+            this.setState({length: l, inErrorState:false, message:"OK"}, () => {this.recalc()});
         }
     }
 
@@ -52,9 +53,9 @@ class RoomCalculator extends React.Component {
         let h = event.target.value;
 
         if (isNaN(h)) {
-            this.setState({message:"Enter a numeric value"});
+            this.setState({message:"Enter a numeric value", inErrorState:true});
         } else {
-            this.setState({height: h}, () => {this.recalc()});
+            this.setState({height: h, inErrorState:false, message:"OK"}, () => {this.recalc()});
         }
     }
 
@@ -78,6 +79,13 @@ class RoomCalculator extends React.Component {
     }
 
     render() {
+
+        let status;
+        if(this.state.inErrorState) {
+            status = <Alert variant='danger'>{this.state.message}</Alert>
+        } else {
+            status = <Alert variant='info'>{this.state.message}</Alert>
+        }
         return(
             <Container>
                 <h1>Room Calculator</h1>
@@ -131,7 +139,8 @@ class RoomCalculator extends React.Component {
                 </Card>
                 <Row>
                     <Col md={12}>
-                        {this.state.message}
+                        {status}
+                        
                     </Col>
                 </Row>
             </Container>

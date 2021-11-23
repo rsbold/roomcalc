@@ -140,7 +140,6 @@ class RoomCalculator extends React.Component {
                 <Row>
                     <Col md={12}>
                         {status}
-                        
                     </Col>
                 </Row>
             </Container>

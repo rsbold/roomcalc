@@ -1,11 +1,13 @@
 
 import React from 'react';
 import {Container, Card, Row, Col, Form, Alert} from 'react-bootstrap';
+import {NOT_NUMERIC_MSG, OK_MSG} from './Constants';
 
 class RoomCalculator extends React.Component {
     // Room width, height, length are state set by user.
     // Floor area, wall area and volume are calculated state.
     // Assumes the room is a cuboid with no windows and doors.
+
 
     constructor(props) {
         
@@ -33,9 +35,9 @@ class RoomCalculator extends React.Component {
         let w = event.target.value;
 
         if(isNaN(w)) {
-            this.setState({message:"Enter a numeric value.", inErrorState:true});
+            this.setState({message:NOT_NUMERIC_MSG, inErrorState:true});
         } else {            
-            this.setState({width: w, inErrorState:false, message:"OK"}, () => {this.recalc()});
+            this.setState({width: w, inErrorState:false, message:OK_MSG}, () => {this.recalc()});
         }   
     }
 
@@ -43,9 +45,9 @@ class RoomCalculator extends React.Component {
         let l = event.target.value;
 
         if(isNaN(l)) {
-            this.setState({message: "Enter a numeric value", inErrorState:true});
+            this.setState({message: NOT_NUMERIC_MSG, inErrorState:true});
         } else {            
-            this.setState({length: l, inErrorState:false, message:"OK"}, () => {this.recalc()});
+            this.setState({length: l, inErrorState:false, message:OK_MSG}, () => {this.recalc()});
         }
     }
 
@@ -53,9 +55,9 @@ class RoomCalculator extends React.Component {
         let h = event.target.value;
 
         if (isNaN(h)) {
-            this.setState({message:"Enter a numeric value", inErrorState:true});
+            this.setState({message:NOT_NUMERIC_MSG, inErrorState:true});
         } else {
-            this.setState({height: h, inErrorState:false, message:"OK"}, () => {this.recalc()});
+            this.setState({height: h, inErrorState:false, message:OK_MSG}, () => {this.recalc()});
         }
     }
 

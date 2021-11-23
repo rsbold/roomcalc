@@ -5,9 +5,10 @@ Visual Studio Code, React, React-Bootstrap.
 ## To Run
 Clone the git repository.
 Run
-    npm install
-    npm start
-
+```
+npm install
+npm start
+```
 ## Description
 The application consists of a single component, RoomCalculator.  This component doesn't take
 any properties.  It maintains state to represent the user-entered width, height and length 

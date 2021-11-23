@@ -92,8 +92,8 @@ class RoomCalculator extends React.Component {
     }
 
     wallPaintArea(width, length, height) {
-        return (length * height * 2) +
-            (width * height * 2);
+        return (length * height * 2.0) +
+            (width * height * 2.0);
     }
 
     roomVolume(width, length, height) {

@@ -125,15 +125,15 @@ class RoomCalculator extends React.Component {
                     <Card.Body>
                         <Row>
                             <Col md={3}>Floor area:</Col>
-                            <Col md={9}>{this.state.floorArea} m²</Col>
+                            <Col md={9}>{this.state.floorArea.toFixed(2)} m²</Col>
                         </Row>
                         <Row>
                             <Col md={3}>Wall paint area:</Col>
-                            <Col md={9}>{this.state.wallPaintArea} m²</Col>
+                            <Col md={9}>{this.state.wallPaintArea.toFixed(2)} m²</Col>
                         </Row>
                         <Row>
                             <Col md={3}>Room volume:</Col>
-                            <Col md={9}>{this.state.roomVolume} m³</Col>
+                            <Col md={9}>{this.state.roomVolume.toFixed(2)} m³</Col>
                         </Row>
                     </Card.Body>
                 </Card>

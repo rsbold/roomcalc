@@ -25,40 +25,25 @@ class RoomCalculator extends React.Component {
             inErrorState: false
         };
 
-        // Wire up event handlers so they get the correct context of "this".
-        this.setWidth = this.setWidth.bind(this);
-        this.setLength = this.setLength.bind(this);
-        this.setHeight = this.setHeight.bind(this);
+        // Wire up event handler so they get the correct context of "this".
+        // Three individual handlers replaced by one common one, relies on 
+        // the name property of the input controls being set correctly.
+        this.setValue = this.setValue.bind(this);
     }
 
-    setWidth(event) {
-        let w = event.target.value;
+    setValue(event)
+    {
+        let name = event.target.name;
+        let value = event.target.value;
 
-        if(isNaN(w)) {
-            this.setState({message:NOT_NUMERIC_MSG, inErrorState:true});
-        } else {            
-            this.setState({width: w, inErrorState:false, message:OK_MSG}, () => {this.recalc()});
-        }   
-    }
+        console.log(name, value);
 
-    setLength(event) {
-        let l = event.target.value;
-
-        if(isNaN(l)) {
-            this.setState({message: NOT_NUMERIC_MSG, inErrorState:true});
-        } else {            
-            this.setState({length: l, inErrorState:false, message:OK_MSG}, () => {this.recalc()});
-        }
-    }
-
-    setHeight(event) {
-        let h = event.target.value;
-
-        if (isNaN(h)) {
+        if(isNaN(value)) {
             this.setState({message:NOT_NUMERIC_MSG, inErrorState:true});
         } else {
-            this.setState({height: h, inErrorState:false, message:OK_MSG}, () => {this.recalc()});
+            this.setState({[name]:value, inErrorState:false, message:OK_MSG}, () => {this.recalc()});
         }
+
     }
 
     recalc() {
@@ -98,21 +83,21 @@ class RoomCalculator extends React.Component {
                         <Form.Group as={Row} className="mb-3">
                             <Form.Label column md={3}>Length (m)</Form.Label>
                             <Col md={9}>
-                                <Form.Control type="text" value={this.state.length} onChange={this.setLength}></Form.Control>
+                                <Form.Control name="length" type="text" value={this.state.length} onChange={this.setValue}></Form.Control>
                             </Col>
                         </Form.Group>
 
                         <Form.Group as={Row} className="mb-3">
                             <Form.Label column md={3}>Width (m)</Form.Label>
                             <Col md={9}>
-                                <Form.Control type="text" value={this.state.width} onChange={this.setWidth}></Form.Control>
+                                <Form.Control name="width" type="text" value={this.state.width} onChange={this.setValue}></Form.Control>
                             </Col>
                         </Form.Group>
 
                         <Form.Group as={Row} className="mb-3">
                             <Form.Label column md={3}>Height (m)</Form.Label>
                             <Col md={9}>
-                                <Form.Control type="text" value={this.state.height} onChange={this.setHeight}></Form.Control>
+                                <Form.Control name="height" type="text" value={this.state.height} onChange={this.setValue}></Form.Control>
                             </Col>
                         </Form.Group>
 

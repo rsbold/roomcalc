@@ -15,12 +15,14 @@ class RoomCalculator extends React.Component {
         super(props);
 
         this.state = {
-            length : 1.0,
-            width : 1.0,
-            height : 1.0,
-            floorArea: 1.0,
-            wallPaintArea: 1.0,
-            roomVolume: 1.0,
+            length : 0.0,
+            width : 0.0,
+            height : 0.0,
+            floorArea: 0.0,
+            wallPaintArea: 0.0,
+            includeCeiling: false,
+            includeFloor: false,
+            roomVolume: 0.0,
             message: "",
             inErrorState: false
         };
@@ -29,6 +31,7 @@ class RoomCalculator extends React.Component {
         // Three individual handlers replaced by one common one, relies on 
         // the name property of the input controls being set correctly.
         this.setValue = this.setValue.bind(this);
+        this.checkboxChange = this.checkboxChange.bind(this);
     }
 
     setValue(event)
@@ -36,14 +39,18 @@ class RoomCalculator extends React.Component {
         let name = event.target.name;
         let value = event.target.value;
 
-        console.log(name, value);
-
         if(isNaN(value)) {
             this.setState({message:NOT_NUMERIC_MSG, inErrorState:true});
         } else {
             this.setState({[name]:value, inErrorState:false, message:OK_MSG}, () => {this.recalc()});
         }
+    }
 
+    checkboxChange(event) {
+        let name = event.target.name;
+        let checked = event.target.checked;
+        
+        this.setState({[name]:checked}, () => {this.recalc()});
     }
 
     recalc() {
@@ -54,6 +61,15 @@ class RoomCalculator extends React.Component {
         // Wall paint area.
         let wpa = (this.state.length * this.state.height * 2.0) + 
             (this.state.width * this.state.height * 2.0);
+
+        // Allow for ceiling and floor area if they're to be included.
+        if(this.state.includeCeiling) {
+            wpa += fa;
+        }
+
+        if(this.state.includeFloor) {
+            wpa += fa;
+        }
 
         // Room volume.
         let rv = this.state.width * this.state.length * this.state.height;
@@ -101,6 +117,19 @@ class RoomCalculator extends React.Component {
                             </Col>
                         </Form.Group>
 
+                        <Form.Group as={Row} className="mb-3">
+                            <Col md={3} />
+                            <Col md={9}>
+                                <Form.Check name="includeCeiling" label="Include ceiling" checked={this.state.includeCeiling} onChange={this.checkboxChange}></Form.Check>
+                            </Col>
+                        </Form.Group>
+
+                        <Form.Group as={Row} className="mb-3">
+                            <Col md={3} />
+                            <Col md={9}>
+                                <Form.Check name="includeFloor" label="Include floor" checked={this.state.includeFloor} onChange={this.checkboxChange}></Form.Check>
+                            </Col>
+                        </Form.Group>
                     </Form>
                 </Card.Body>
                 </Card>

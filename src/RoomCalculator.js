@@ -92,67 +92,73 @@ class RoomCalculator extends React.Component {
         return(
             <Container>
                 <h1>Room Calculator</h1>
-                <Card>
-                    <Card.Header>Room Dimensions</Card.Header>
-                    <Card.Body>
-                    <Form>
-                        <Form.Group as={Row} className="mb-3">
-                            <Form.Label column md={3}>Length (m)</Form.Label>
-                            <Col md={9}>
-                                <Form.Control name="length" type="text" value={this.state.length} onChange={this.setValue}></Form.Control>
-                            </Col>
-                        </Form.Group>
+                <Row>
+                    <Col md={6}>
+                        <Card>
+                            <Card.Header>Room Dimensions</Card.Header>
+                            <Card.Body>
+                            <Form>
+                                <Form.Group as={Row} className="mb-3">
+                                    <Form.Label column md={3}>Length (m)</Form.Label>
+                                    <Col md={9}>
+                                        <Form.Control name="length" type="text" value={this.state.length} onChange={this.setValue}></Form.Control>
+                                    </Col>
+                                </Form.Group>
 
-                        <Form.Group as={Row} className="mb-3">
-                            <Form.Label column md={3}>Width (m)</Form.Label>
-                            <Col md={9}>
-                                <Form.Control name="width" type="text" value={this.state.width} onChange={this.setValue}></Form.Control>
-                            </Col>
-                        </Form.Group>
+                                <Form.Group as={Row} className="mb-3">
+                                    <Form.Label column md={3}>Width (m)</Form.Label>
+                                    <Col md={9}>
+                                        <Form.Control name="width" type="text" value={this.state.width} onChange={this.setValue}></Form.Control>
+                                    </Col>
+                                </Form.Group>
 
-                        <Form.Group as={Row} className="mb-3">
-                            <Form.Label column md={3}>Height (m)</Form.Label>
-                            <Col md={9}>
-                                <Form.Control name="height" type="text" value={this.state.height} onChange={this.setValue}></Form.Control>
-                            </Col>
-                        </Form.Group>
+                                <Form.Group as={Row} className="mb-3">
+                                    <Form.Label column md={3}>Height (m)</Form.Label>
+                                    <Col md={9}>
+                                        <Form.Control name="height" type="text" value={this.state.height} onChange={this.setValue}></Form.Control>
+                                    </Col>
+                                </Form.Group>
 
-                        <Form.Group as={Row} className="mb-3">
-                            <Col md={3} />
-                            <Col md={9}>
-                                <Form.Check name="includeCeiling" label="Include ceiling" checked={this.state.includeCeiling} onChange={this.checkboxChange}></Form.Check>
-                            </Col>
-                        </Form.Group>
+                                <Form.Group as={Row} className="mb-3">
+                                    <Col md={3} />
+                                    <Col md={9}>
+                                        <Form.Check name="includeCeiling" label="Include ceiling" checked={this.state.includeCeiling} onChange={this.checkboxChange}></Form.Check>
+                                    </Col>
+                                </Form.Group>
 
-                        <Form.Group as={Row} className="mb-3">
-                            <Col md={3} />
-                            <Col md={9}>
-                                <Form.Check name="includeFloor" label="Include floor" checked={this.state.includeFloor} onChange={this.checkboxChange}></Form.Check>
-                            </Col>
-                        </Form.Group>
-                    </Form>
-                </Card.Body>
-                </Card>
+                                <Form.Group as={Row} className="mb-3">
+                                    <Col md={3} />
+                                    <Col md={9}>
+                                        <Form.Check name="includeFloor" label="Include floor" checked={this.state.includeFloor} onChange={this.checkboxChange}></Form.Check>
+                                    </Col>
+                                </Form.Group>
+                            </Form>
+                        </Card.Body>
+                        </Card>
+                    </Col>
 
-                <Card>
-                    <Card.Header>
-                        Calculations
-                    </Card.Header>
-                    <Card.Body>
-                        <Row>
-                            <Col md={3}>Floor area:</Col>
-                            <Col md={9}>{this.state.floorArea.toFixed(2)} m²</Col>
-                        </Row>
-                        <Row>
-                            <Col md={3}>Wall paint area:</Col>
-                            <Col md={9}>{this.state.wallPaintArea.toFixed(2)} m²</Col>
-                        </Row>
-                        <Row>
-                            <Col md={3}>Room volume:</Col>
-                            <Col md={9}>{this.state.roomVolume.toFixed(2)} m³</Col>
-                        </Row>
-                    </Card.Body>
-                </Card>
+                    <Col md={6}>
+                        <Card md={6}>
+                            <Card.Header>
+                                Calculations
+                            </Card.Header>
+                            <Card.Body>
+                                <Row>
+                                    <Col md={3}>Floor area:</Col>
+                                    <Col md={9} Align="right">{this.state.floorArea.toFixed(2)} m²</Col>
+                                </Row>
+                                <Row>
+                                    <Col md={3}>Wall paint area:</Col>
+                                    <Col md={9} Align="right">{this.state.wallPaintArea.toFixed(2)} m²</Col>
+                                </Row>
+                                <Row>
+                                    <Col md={3}>Room volume:</Col>
+                                    <Col md={9} Align="right">{this.state.roomVolume.toFixed(2)} m³</Col>
+                                </Row>
+                            </Card.Body>
+                        </Card>
+                    </Col>
+                </Row>
                 <Row>
                     <Col md={12}>
                         {status}

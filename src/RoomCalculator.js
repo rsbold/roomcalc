@@ -2,6 +2,7 @@
 import React from 'react';
 import {Container, Card, Row, Col, Form, Alert} from 'react-bootstrap';
 import {NOT_NUMERIC_MSG, OK_MSG} from './Constants';
+import NumberFormat from 'react-number-format';
 
 class RoomCalculator extends React.Component {
     // Room width, height, length are state set by user.
@@ -145,15 +146,30 @@ class RoomCalculator extends React.Component {
                             <Card.Body>
                                 <Row>
                                     <Col md={3}>Floor area:</Col>
-                                    <Col md={9} Align="right">{this.state.floorArea.toFixed(2)} m²</Col>
+                                    <Col md={9} Align="right">
+					<NumberFormat value={this.state.floorArea.toFixed(2)}
+						displayType={"text"}
+						thousandSeparator={true}
+						suffix="  m²"/>
+				    </Col>
                                 </Row>
                                 <Row>
                                     <Col md={3}>Wall paint area:</Col>
-                                    <Col md={9} Align="right">{this.state.wallPaintArea.toFixed(2)} m²</Col>
+                                    <Col md={9} Align="right">
+					<NumberFormat value={this.state.wallPaintArea.toFixed(2)}
+					    displayType={"text"}
+					    thousandSeparator={true}
+					    suffix="  m²" />
+				    </Col>
                                 </Row>
                                 <Row>
                                     <Col md={3}>Room volume:</Col>
-                                    <Col md={9} Align="right">{this.state.roomVolume.toFixed(2)} m³</Col>
+                                    <Col md={9} Align="right">
+					<NumberFormat value={this.state.roomVolume.toFixed(2)}
+					    displayType={"text"}
+					    thousandSeparator={true}
+					    suffix="  m³" />
+				    </Col>
                                 </Row>
                             </Card.Body>
                         </Card>
